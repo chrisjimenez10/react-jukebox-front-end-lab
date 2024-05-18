@@ -3,11 +3,26 @@
 
 const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/tracks`;
 
-const fetchData = async ()=>{
-    const response = await fetch(BASE_URL);
-    const data = await response.json();
-    console.log(data);
-}
-fetchData();
+const fetchTracks = async ()=>{
+    try{
+        const response = await fetch(BASE_URL);
+        if(!response.ok){
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log(data);
+    }catch(error){
+        //TypeError - An error often related to network issues or issues with the fetch operation itself
+        if(error instanceof TypeError){
+            console.error(`There was a problem with the fetch operation: ${error.message}`);
+        //SyntaxError - An error often related to issues with parsing the JSON, common if the response is not valid JSON
+        }else if(error instanceof SyntaxError){
+            console.error(`There was a problem parsing the JSON: ${error.message}`)
+        }else{
+            console.error(`An unexpected error occured: ${error.message}`);
+        }
+    }
 
-export {fetchData};
+}
+
+export {fetchTracks};

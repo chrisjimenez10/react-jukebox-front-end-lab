@@ -1,9 +1,9 @@
 import * as trackService from "./services/trackService.js";
-const {fetchData} = trackService;
+const {fetchTracks} = trackService;
 
 const App = () => {
 
-  fetchData();
+  fetchTracks();
 
   return <h1>Hello world!</h1>;
 };
