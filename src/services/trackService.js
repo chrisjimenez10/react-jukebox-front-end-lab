@@ -10,7 +10,7 @@ const fetchTracks = async ()=>{
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-        console.log(data);
+        return data;
     }catch(error){
         //TypeError - An error often related to network issues or issues with the fetch operation itself
         if(error instanceof TypeError){
@@ -23,6 +23,50 @@ const fetchTracks = async ()=>{
         }
     }
 
-}
+};
 
-export {fetchTracks};
+const deleteTrack = async (id) =>{
+    try{
+        const response = await fetch(`${BASE_URL}/${id}`, {
+            method: "DELETE",
+        });
+        const data = await response.json();
+        console.log(data); 
+    }catch(error){
+        console.error(error.message);
+    }
+};
+
+const addNewTrack = async (stateData)=>{
+    try{
+        const response = await fetch(BASE_URL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(stateData),
+        });
+        const data = await response.json();
+        console.log(data);
+    }catch(error){
+        console.error(error.message);
+    }
+};
+
+const editTrack = async (id, stateData) =>{
+    try{
+        const response = await fetch(`${BASE_URL}/${id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(stateData),
+        });
+        const data = await response.json();
+        console.log(data);
+    }catch(error){
+        console.error(error.message);
+    }
+};
+
+export {fetchTracks, deleteTrack, addNewTrack, editTrack};
