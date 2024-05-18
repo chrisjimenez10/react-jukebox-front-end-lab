@@ -2,7 +2,7 @@ import {useState} from "react";
 
 //Child Component
 const TrackForm = (props) => {
-    const {addNewTrack, setTrackForm, editTrack} = props;
+    const {addNewTrack, setTrackForm, editTrack, setEditTrackForm} = props;
 
     //State
     const [formData, setFormData] = useState({
@@ -33,6 +33,7 @@ const TrackForm = (props) => {
         <label htmlFor="artist">Artist: </label>
         <input id="artist" name="artist" type="text" value={formData.artist} onChange={handleInputChange}/>
         <button type="submit">Add</button>
+        <button onClick={()=>{setEditTrackForm("")}}>Back</button>
     </form>
   )
 }

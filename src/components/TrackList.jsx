@@ -15,7 +15,7 @@ const TrackList = (props) => {
 
     const renderComponent = () =>{
         if(editTrackForm === "form"){
-            return <TrackForm trackList={trackList}/>
+            return <TrackForm trackList={trackList} setEditTrackForm={setEditTrackForm}/>
         }
     }
 
