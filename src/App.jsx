@@ -33,7 +33,7 @@ const App = () => {
       <button onClick={()=> setTrackForm("form")} style={trackForm === "form" ? {display: "none"} : {color: "black"}}>Add New Track</button>
       {renderComponent()}
 
-      <TrackList trackList={trackList} deleteTrack={deleteTrack}/>
+      <TrackList trackList={trackList} deleteTrack={deleteTrack} addNewTrack={addNewTrack} editTrack={editTrack}/>
 
     </>
 
