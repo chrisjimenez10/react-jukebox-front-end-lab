@@ -1,7 +1,7 @@
 
 //Child Component
 const TrackList = (props) => {
-    const {trackList, deleteTrack, setTrackToEdit, setTrackForm} = props;
+    const {trackList, deleteTrack, setTrackToEdit, setTrackForm, setTrackToPlay, setPlayingNow} = props;
     
     //Functions
     const handleDelete = (id) =>{
@@ -14,6 +14,11 @@ const TrackList = (props) => {
         setTrackForm("form"); //Renders edit form (Using the ampersand logical operator on parent component by changing state to "form" and render the component)
     };
 
+    const handlePlayingNow = (track) =>{
+        setTrackToPlay(track);
+        setPlayingNow("playing");
+    }
+
     return (
 
         <div className="trackList">
@@ -23,7 +28,7 @@ const TrackList = (props) => {
                 return(
                     <li key={track._id}>
                         <h3>{track.title} by <span style={{color: "red"}}>{track.artist}</span></h3>
-                        <button>Play</button>
+                        <button onClick={()=> handlePlayingNow(track)}>Play</button>
                         <button onClick={()=> handleEdit(track)}>Edit</button>
                         <button onClick={()=> handleDelete(track._id)}>Delete</button>
                     </li>

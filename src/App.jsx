@@ -13,6 +13,8 @@ const App = () => {
   const [trackList, setTrackList] = useState([]);
   const [trackForm, setTrackForm] = useState(""); //NOTE: Sole purpose of this state variable is to use to conditionally render our child component with the help of the logical operator(s) - && / || 
   const [trackToEdit, setTrackToEdit] = useState(null);
+  const [playingNow, setPlayingNow] = useState("");
+  const [trackToPlay, setTrackToPlay] = useState({});
 
   //Functions
     //Defined the fetchData() function that fetches the list of tracks in our Database Collection via our back-end server OUTSIDE of the useEffect() Hook because we will re-fetch the data to update the state variable after EVERY CRUD Operation --> This avoided the infinite GET Request loop bug
@@ -71,9 +73,13 @@ const App = () => {
         />
       )}
 
-      <TrackList trackList={trackList} deleteTrack={handleDeleteTrack} setTrackToEdit={setTrackToEdit} setTrackForm={setTrackForm}/>
+      <TrackList trackList={trackList} deleteTrack={handleDeleteTrack} setTrackToEdit={setTrackToEdit} setTrackForm={setTrackForm} setTrackToPlay={setTrackToPlay} setPlayingNow={setPlayingNow}/>
 
-      <NowPlaying />
+      {playingNow === "playing" && (
+        <NowPlaying 
+          trackToPlay={trackToPlay}
+        />
+      )}
 
     </>
 
