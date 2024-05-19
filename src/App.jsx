@@ -60,7 +60,7 @@ const App = () => {
     <>
 
       <button onClick={()=> setTrackForm("form")} style={trackForm === "form" ? {display: "none"} : {color: "black"}}>Add New Track</button>
-      {/* Conditional Rendering of the component - By using the ampersand locial operator (&&), if trackForm !== "form" then it is falsy and it short circuits, so it renders NOTHING -- If trackForm === "form" (which is true when we click the button because we update the state variable to be the string "form" by invoking the state setter function on the "onClick" event handler) then the second operand is returned, thus rendered (In this case, the second operand is the component we want to conditionally render) */}
+      {/* Conditional Rendering of the component - By using the ampersand logial operator (&&), if trackForm !== "form" then it is falsy and it short circuits, so it renders NOTHING -- If trackForm === "form" (which is true when we click the button because we update the state variable to be the string "form" by invoking the state setter function on the "onClick" event handler) then the second operand is returned, thus rendered (In this case, the second operand is the component we want to conditionally render) */}
       {trackForm === "form" && (
         <TrackForm 
           addNewTrack={handleAddTrack}
