@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 
 //Child Component
 const TrackForm = (props) => {
-    const {addNewTrack, setTrackForm, editTrack, setEditTrackForm, trackToEdit} = props;
+    const {addNewTrack, setTrackForm, editTrack, trackToEdit, setTrackToEdit} = props;
 
     //State
     const [formData, setFormData] = useState({
@@ -31,7 +31,6 @@ const TrackForm = (props) => {
         //NOTE: Since we are using the same button to submit the form for both features, we need to distinguish between both actions with an if...else statement - Here, we are using the "trackToEdit" state variable being passed and if it EXISTS then we use the "editTrack()" async function that performs the PUT HTTP Request 
         if(trackToEdit){
             editTrack(trackToEdit._id, formData); //The function requires two arguments - the "id" of the track (that is how it's set up in our back-end server to perform the operation via Mongoose/MongoDB) + the EDITED object
-            setEditTrackForm("");
         }else{
             addNewTrack(formData); // Here, if we click on the "Add New Track" button - then "trackToEdit" DOES NOT EXIST, so we execute the async function that performs the POST HTTP Request to our back-end server
         }
@@ -40,6 +39,7 @@ const TrackForm = (props) => {
             artist: "",
         });
         setTrackForm("");
+        setTrackToEdit(null);
     };
 
   return (
@@ -49,8 +49,8 @@ const TrackForm = (props) => {
 
         <label htmlFor="artist">Artist: </label>
         <input id="artist" name="artist" type="text" value={formData.artist} onChange={handleInputChange}/>
-        <button type="submit">Add</button>
-        <button onClick={()=>{setEditTrackForm(""); setTrackForm("")}}>Back</button>
+        <button type="submit">{trackToEdit ? "Update" : "Add"}</button>
+        <button onClick={()=>{setTrackForm(""); setTrackToEdit("");}}>Back</button>
     </form>
   )
 }
