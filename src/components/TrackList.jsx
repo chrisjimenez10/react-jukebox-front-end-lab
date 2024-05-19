@@ -27,7 +27,7 @@ const TrackList = (props) => {
             {trackList.map((track)=>{
                 return(
                     <li key={track._id}>
-                        <h3>{track.title} by <span style={{color: "red"}}>{track.artist}</span></h3>
+                        <h3>{track.title} by <span style={{color: "blue"}}>{track.artist}</span></h3>
                         <button onClick={()=> handlePlayingNow(track)}>Play</button>
                         <button onClick={()=> handleEdit(track)}>Edit</button>
                         <button onClick={()=> handleDelete(track._id)}>Delete</button>
