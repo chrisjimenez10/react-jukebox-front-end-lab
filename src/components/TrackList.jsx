@@ -2,13 +2,13 @@
 import TrackForm from "./TrackForm";
 import {useState} from "react";
 
+
 //Child Component
 const TrackList = (props) => {
     const {trackList, deleteTrack, setTrackToEdit, setTrackForm} = props;
     
     //State
     const [editTrackForm, setEditTrackForm] = useState("");
-    // const [trackToEdit, setTrackToEdit] = useState(null); //NOTE: Created a new state variable to hold the track that will be edited, so it is treated indpendently from the list of tracks rendered initially or created
 
     //Functions
     const handleDelete = (id) =>{
@@ -17,16 +17,10 @@ const TrackList = (props) => {
 
         //The argument "track" corresponds to the individual track item resulting from the mapping of the array, which then is passsed to the "handleEdit() function on the onClick() event" - NOTE: I was struggling with this initially because I needed the "Id" of the song for the fetch function to work and KNOW which item to target
     const handleEdit = (track)=>{
-        setTrackToEdit(track); //Initial value of state varialbe is "null", but then it is set to the track item we passsed to the function - NOTE: Now, we can pass this state to <Trackform /> and be able to complete the edit feature (since now we are passing an actual item with the Database Id needed to edit it)
+        setTrackToEdit(track); //Initial value of state varialbe is "null", but NOW it is set to the track item we passsed to the function
         setEditTrackForm("form");
-        setTrackForm("form");
+        setTrackForm("form"); //Renders edit form (Using the ampersand logical operator on parent component by changing state to "form" and render the component)
     };
-
-    // const renderComponent = () =>{
-    //     if(editTrackForm === "form"){
-    //         return <TrackForm trackList={trackList} setEditTrackForm={setEditTrackForm} trackToEdit={trackToEdit} editTrack={editTrack} addNewTrack={addNewTrack}/>
-    //     }
-    // };
 
     return (
 
