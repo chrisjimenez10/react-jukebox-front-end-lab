@@ -37,6 +37,7 @@ const TrackForm = (props) => {
         setFormData({
             title: "",
             artist: "",
+            soundClipUrl: "",
         });
         setTrackForm("");
         setTrackToEdit(null); //Resetting state of "trackToEdit" back to intial value of null - so we have an empty input field if we want to go from "edit" to "add" directly (it follows our logic in handleSubmit() where if "trackToEdit does not exist, it will set up the add form with empty field to type in")
@@ -49,6 +50,10 @@ const TrackForm = (props) => {
 
         <label htmlFor="artist">Artist: </label>
         <input id="artist" name="artist" type="text" value={formData.artist} onChange={handleInputChange}/>
+
+        <label htmlFor="audio">Audio: </label>
+        <input id="audio" name="soundClipUrl" type="text" value={formData.soundClipUrl} onChange={handleInputChange}/>
+       
         <button type="submit">{trackToEdit ? "Update" : "Add"}</button>
         <button onClick={()=>{setTrackForm(""); setTrackToEdit("");}}>Back</button>
     </form>

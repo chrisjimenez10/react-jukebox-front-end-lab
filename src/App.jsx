@@ -2,6 +2,7 @@ import {useState, useEffect} from "react";
 import TrackList from "./components/TrackList.jsx";
 import TrackForm from "./components/TrackForm.jsx";
 import NowPlaying from "./components/NowPlaying.jsx";
+import "./App.css";
 import * as trackService from "./services/trackService.js";
 const {fetchTracks, deleteTrack, addNewTrack, editTrack} = trackService; //PUT feature pending
 
