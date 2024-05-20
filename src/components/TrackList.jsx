@@ -29,9 +29,11 @@ const TrackList = (props) => {
                 return(
                     <li key={track._id}>
                         <h3><FaMusic /> {track.title} by <span style={{color: "blue"}}>{track.artist}</span></h3>
-                        <button onClick={()=> handlePlayingNow(track)}>Play</button>
-                        <button onClick={()=> handleEdit(track)}>Edit</button>
-                        <button onClick={()=> handleDelete(track._id)}>Delete</button>
+                        <div id="buttons">
+                            <button id="play-btn" onClick={()=> handlePlayingNow(track)}>Play</button>
+                            <button id="edit-btn" onClick={()=> handleEdit(track)}>Edit</button>
+                            <button id="delete-btn" onClick={()=> handleDelete(track._id)}>Delete</button>
+                        </div>
                     </li>
                 )
             })}

@@ -17,6 +17,7 @@ const TrackForm = (props) => {
             setFormData({
                 title: trackToEdit.title,
                 artist: trackToEdit.artist,
+                soundClipUrl: trackToEdit.soundClipUrl,
             });
         }
     }, [trackToEdit]);
