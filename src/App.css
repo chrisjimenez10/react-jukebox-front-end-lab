@@ -9,7 +9,6 @@
 .body {
   background-color: hsla(0, 0%, 72%, 1);
   height: 100vh;
-  
 }
 
 ul {
@@ -65,7 +64,7 @@ h4, #nowPlayingTitle {
 }
 
 #left {
-  width: 150px;
+  width: 200px;
 }
 
 button {
