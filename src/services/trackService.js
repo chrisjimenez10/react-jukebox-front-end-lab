@@ -3,6 +3,19 @@
 
 const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/tracks`;
 
+const BASE_URL_AUDIO = `${import.meta.env.VITE_BACK_END_SERVER_URL}/audio`;
+
+const fetchAudio = async (name) =>{
+    try{
+        const response = await fetch(`${BASE_URL_AUDIO}/${name}`);
+        const data = await response.json();
+        console.log(data)
+        return data;
+    }catch(error){
+        console.error(error);
+    }
+};
+
 const fetchTracks = async ()=>{
     try{
         const response = await fetch(BASE_URL);
@@ -69,4 +82,5 @@ const editTrack = async (id, stateData) =>{
     }
 };
 
-export {fetchTracks, deleteTrack, addNewTrack, editTrack};
+
+export {fetchTracks, deleteTrack, addNewTrack, editTrack, fetchAudio};

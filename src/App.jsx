@@ -2,9 +2,10 @@ import {useState, useEffect} from "react";
 import TrackList from "./components/TrackList.jsx";
 import TrackForm from "./components/TrackForm.jsx";
 import NowPlaying from "./components/NowPlaying.jsx";
+import SearchArtist from "./components/SearchArtist.jsx";
 import "./App.css";
 import * as trackService from "./services/trackService.js";
-const {fetchTracks, deleteTrack, addNewTrack, editTrack} = trackService; //PUT feature pending
+const {fetchTracks, deleteTrack, addNewTrack, editTrack, fetchAudio} = trackService; //PUT feature pending
 
 
 //Parent Component
@@ -16,6 +17,8 @@ const App = () => {
   const [trackToEdit, setTrackToEdit] = useState(null);
   const [playingNow, setPlayingNow] = useState("");
   const [trackToPlay, setTrackToPlay] = useState({});
+  const [searchArtistForm, setSearchArtistForm] = useState("");
+  const [artistResults, setArtistResults] = useState({});
 
   //Functions
     //Defined the fetchData() function that fetches the list of tracks in our Database Collection via our back-end server OUTSIDE of the useEffect() Hook because we will re-fetch the data to update the state variable after EVERY CRUD Operation --> This avoided the infinite GET Request loop bug
@@ -26,6 +29,16 @@ const App = () => {
     }catch(error){
       console.error(`Error fetching tracks: ${error}`);
     }
+};
+
+const fetchAudioData = async (name)=>{
+  try{
+    const artistData = await fetchAudio(name);
+    // console.log(artistData);
+    setArtistResults(artistData);
+  }catch(error){
+    console.error(error)
+  }
 };
 
   useEffect(()=>{
@@ -60,9 +73,17 @@ const App = () => {
   };
 
   return (
-    <div className="body">
-
+    <>
+      
       <button  id="addNewTrack" onClick={()=> setTrackForm("form")} style={trackForm === "form" ? {display: "none"} : {color: "white"}}>Add New Track</button>
+
+      <button onClick={()=> setSearchArtistForm("search")} style={searchArtistForm === "search" ? {display: "none"} : {color: "white"}}>Search Artist</button>
+      {searchArtistForm === "search" && (
+        <SearchArtist fetchAudioData={fetchAudioData} setSearchArtistForm={setSearchArtistForm}/>
+      )}
+
+      {artistResults.trackTitle} {artistResults.trackUrl}
+
       {/* Conditional Rendering of the component - By using the ampersand logial operator (&&), if trackForm !== "form" then it is falsy and it short circuits, so it renders NOTHING -- If trackForm === "form" (which is true when we click the button because we update the state variable to be the string "form" by invoking the state setter function on the "onClick" event handler) then the second operand is returned, thus rendered (In this case, the second operand is the component we want to conditionally render) */}
       {trackForm === "form" && (
         <TrackForm 
@@ -82,7 +103,7 @@ const App = () => {
         />
       )}
 
-    </div>
+    </>
 
   )
 };
