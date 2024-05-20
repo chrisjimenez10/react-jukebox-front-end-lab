@@ -19,6 +19,7 @@ const App = () => {
   const [trackToPlay, setTrackToPlay] = useState({});
   const [searchArtistForm, setSearchArtistForm] = useState("");
   const [artistResults, setArtistResults] = useState({});
+  const [displayResults, setDisplayResults] = useState("");
 
   //Functions
     //Defined the fetchData() function that fetches the list of tracks in our Database Collection via our back-end server OUTSIDE of the useEffect() Hook because we will re-fetch the data to update the state variable after EVERY CRUD Operation --> This avoided the infinite GET Request loop bug
@@ -79,10 +80,15 @@ const fetchAudioData = async (name)=>{
 
       <button onClick={()=> setSearchArtistForm("search")} style={searchArtistForm === "search" ? {display: "none"} : {color: "white"}}>Search Artist</button>
       {searchArtistForm === "search" && (
-        <SearchArtist fetchAudioData={fetchAudioData} setSearchArtistForm={setSearchArtistForm}/>
+        <SearchArtist fetchAudioData={fetchAudioData} setSearchArtistForm={setSearchArtistForm} setDisplayResults={setDisplayResults}/>
       )}
 
-      {artistResults.trackTitle} {artistResults.trackUrl}
+      {displayResults === "display" && (
+        <div id="results">
+          <h5><span style={{color: "orange"}}>Title: </span> {artistResults.trackTitle}</h5>
+          <h5><span style={{color: "purple"}}>Audio URL: </span> {artistResults.trackUrl}</h5>
+        </div>
+      )}
 
       {/* Conditional Rendering of the component - By using the ampersand logial operator (&&), if trackForm !== "form" then it is falsy and it short circuits, so it renders NOTHING -- If trackForm === "form" (which is true when we click the button because we update the state variable to be the string "form" by invoking the state setter function on the "onClick" event handler) then the second operand is returned, thus rendered (In this case, the second operand is the component we want to conditionally render) */}
       {trackForm === "form" && (
@@ -92,6 +98,8 @@ const fetchAudioData = async (name)=>{
           editTrack={handleEditTrack}
           trackToEdit={trackToEdit}
           setTrackToEdit={setTrackToEdit}
+          setDisplayResults={setDisplayResults}
+          setSearchArtistForm={setSearchArtistForm}
         />
       )}
 

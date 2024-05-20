@@ -1,7 +1,7 @@
 import {useState} from "react";
 
 const SearchArtist = (props) => {
-    const {fetchAudioData, setSearchArtistForm} = props;
+    const {fetchAudioData, setSearchArtistForm, setDisplayResults} = props;
 
     //State
     const [artist, setArtist] = useState("");
@@ -14,6 +14,7 @@ const SearchArtist = (props) => {
     const handleSubmit = (event) =>{
         event.preventDefault();
         fetchAudioData(artist);
+        setDisplayResults("display");
     };
 
   return (
